@@ -30,6 +30,16 @@
          (abs-path     (buffer-file-name)))
     (replace-regexp-in-string (format "^%s/" top-path) "" abs-path)))
 
+(defun open-github:make-line-params (begin end)
+  (if (use-region-p)
+      (let
+          ((begin-num (line-number-at-pos begin))
+           (end-num   (line-number-at-pos end)))
+        (if (= begin-num end-num)
+            (format "#L%d" begin-num)
+          (format "#L%d-%d" begin-num end-num)))
+    ""))
+
 (defun open-github:open-repository ()
   "Open repository top page on Github for current file."
   (interactive)
@@ -38,9 +48,17 @@
         (browse-url repo-url)
       (message "It seems not a file on github."))))
 
-(defun open-github:open-file ()
+(defun open-github:open-file (begin end)
   "Open file page on Github for current file.
-If region is selected, open with line parameters.")
+If region is selected, open with line parameters."
+  (interactive "r")
+  (let ((repo-url (open-github:get-remote-repository-url)))
+    (if repo-url
+        (let ((branch      (open-github:get-branch))
+              (file-path   (open-github:get-file-path))
+              (line-params (open-github:make-line-params begin end)))
+          (browse-url (format "%s/blob/%s/%s%s" repo-url branch file-path line-params)))
+      (message "It seems not a file on github."))))
 
 (defun open-github:open-diff ()
   "Open diff page on Github for current file.
