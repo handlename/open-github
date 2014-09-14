@@ -1,6 +1,33 @@
 ;;; package --- Open URL of Github for current file
+
+;; Copyright (C) 2014 by NAGATA Hiroaki
+
+;; Author: NAGATA Hiroaki (@handlename)
+;; URL: https://github.com/handlename/open-github
+;; Version: 0.01
+
+;; This program is free software; you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation, either version 3 of the License, or
+;; (at your option) any later version.
+
+;; This program is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+
+;; You should have received a copy of the GNU General Public License
+;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 ;;; Commentary:
+
+;; This package is utilty to open URL of Github for current file in default browser.
+;; To use tthis package, add these lines to your init.el or .emacs file:
+;;     (add-to-list 'load-path "path/to/open-github-dir")
+;;     (require 'open-github)
+
 ;;; Code:
+
 (defun open-github:chomp (str)
   (replace-regexp-in-string "[\n\r]+$" "" str))
 
