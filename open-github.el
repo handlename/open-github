@@ -40,6 +40,14 @@
           (format "#L%d-%d" begin-num end-num)))
     ""))
 
+(defun open-github:open-url (format &optional params)
+  (let ((repo-url (open-github:get-remote-repository-url)))
+    (if repo-url
+        (let ((branch    (open-github:get-branch))
+              (file-path (open-github:get-file-path)))
+          (browse-url (format format repo-url branch file-path params)))
+      (message "It seems not a file on github."))))
+
 (defun open-github:open-repository ()
   "Open repository top page on Github for current file."
   (interactive)
@@ -52,13 +60,8 @@
   "Open file page on Github for current file.
 If region is selected, open with line parameters."
   (interactive "r")
-  (let ((repo-url (open-github:get-remote-repository-url)))
-    (if repo-url
-        (let ((branch      (open-github:get-branch))
-              (file-path   (open-github:get-file-path))
-              (line-params (open-github:make-line-params begin end)))
-          (browse-url (format "%s/blob/%s/%s%s" repo-url branch file-path line-params)))
-      (message "It seems not a file on github."))))
+  (let ((line-params (open-github:make-line-params begin end)))
+    (open-github:open-url "%s/blob/%s/%s%s" line-params)))
 
 (defun open-github:open-diff ()
   "Open diff page on Github for current file.
@@ -71,12 +74,7 @@ If region is selected, open with line parameters.")
 (defun open-github:open-history ()
   "Open history page on Github for current file."
   (interactive)
-  (let ((repo-url (open-github:get-remote-repository-url)))
-    (if repo-url
-        (let ((branch    (open-github:get-branch))
-              (file-path (open-github:get-file-path)))
-          (browse-url (format "%s/commits/%s/%s" repo-url branch file-path)))
-      (message "It seems not a file on github."))))
+  (open-github:open-url "%s/commits/%s/%s"))
 
 (defun open-github:open-pull-request ()
   "Open pull-request top page on Github for current file.")
