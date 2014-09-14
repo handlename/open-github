@@ -78,10 +78,7 @@
 (defun open-github:open-repository ()
   "Open repository top page on Github for current file."
   (interactive)
-  (let ((repo-url (open-github:get-remote-repository-url)))
-    (if repo-url
-        (browse-url repo-url)
-      (message "It seems not a file on github."))))
+  (open-github:open-url "%s"))
 
 (defun open-github:open-file (begin end)
   "Open file page on Github for current file.
