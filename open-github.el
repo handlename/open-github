@@ -67,9 +67,12 @@ If region is selected, open with line parameters."
   "Open diff page on Github for current file.
 If region is selected, open with line parameters.")
 
-(defun open-github:open-blame ()
+(defun open-github:open-blame (begin end)
   "Open blame page on Github for current file.
-If region is selected, open with line parameters.")
+If region is selected, open with line parameters."
+  (interactive "r")
+  (let ((line-params (open-github:make-line-params begin end)))
+    (open-github:open-url "%s/blame/%s/%s%s" line-params)))
 
 (defun open-github:open-history ()
   "Open history page on Github for current file."
