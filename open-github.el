@@ -63,9 +63,12 @@ If region is selected, open with line parameters."
   (let ((line-params (open-github:make-line-params begin end)))
     (open-github:open-url "%s/blob/%s/%s%s" line-params)))
 
+;;; TODO:
 (defun open-github:open-diff ()
   "Open diff page on Github for current file.
-If region is selected, open with line parameters.")
+If region is selected, open with line parameters."
+  (interactive)
+  (message "not implement yet"))
 
 (defun open-github:open-blame (begin end)
   "Open blame page on Github for current file.
@@ -79,8 +82,11 @@ If region is selected, open with line parameters."
   (interactive)
   (open-github:open-url "%s/commits/%s/%s"))
 
+;;; TODO:
 (defun open-github:open-pull-request ()
-  "Open pull-request top page on Github for current file.")
+  "Open pull-request top page on Github for current file."
+  (interactive)
+  (message "not implement yet"))
 
 (provide 'open-github)
 ;;; open-github ends here
