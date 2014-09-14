@@ -1,4 +1,4 @@
-;;; package --- Open URL of Github for current file
+;;; open-github.el --- Open URL of Github for current file
 
 ;; Copyright (C) 2014 by NAGATA Hiroaki
 
@@ -113,4 +113,4 @@ If region is selected, open with line parameters."
   (message "not implement yet"))
 
 (provide 'open-github)
-;;; open-github ends here
+;;; open-github.el ends here
