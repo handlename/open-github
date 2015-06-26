@@ -67,12 +67,12 @@
           (format "#L%d-%d" begin-num end-num)))
     ""))
 
-(defun open-github:open-url (format &optional params)
+(defun open-github:open-url (fmt &optional params)
   (let ((repo-url (open-github:get-remote-repository-url)))
     (if repo-url
         (let ((branch    (open-github:get-branch))
               (file-path (open-github:get-file-path)))
-          (browse-url (format format repo-url branch file-path params)))
+          (browse-url (format fmt repo-url branch file-path params)))
       (message "It seems not a file on github."))))
 
 (defun open-github:open-repository ()
@@ -106,11 +106,10 @@ If region is selected, open with line parameters."
   (interactive)
   (open-github:open-url "%s/commits/%s/%s"))
 
-;;; TODO:
 (defun open-github:open-pull-request ()
   "Open pull-request top page on Github for current file."
   (interactive)
-  (message "not implement yet"))
+  (open-github:open-url "%s/compare/%s?expand=1"))
 
 (provide 'open-github)
 ;;; open-github.el ends here
