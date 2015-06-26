@@ -38,7 +38,9 @@
         (let*
             ((remote-raw (shell-command-to-string "git config --get remote.origin.url"))
              (remote     (open-github:chomp remote-raw)))
-          (if (string-match "^[^@]+@\\([^:]+\\):\\([^/]+\\)/\\([^\\.]+\\)\\.git$" remote)
+          (if (or
+               (string-match "^[^@]+@\\([^:]+\\):\\([^/]+\\)/\\([^\\.]+\\)\\.git$" remote) ; git@...
+               (string-match "^https?://\\([^/]+\\)/\\([^/]+\\)/\\(.+\\)$" remote))        ; https://...
               (let
                   ((host (match-string 1 remote))
                    (user (match-string 2 remote))
